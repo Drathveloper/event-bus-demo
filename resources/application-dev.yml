@@ -1,0 +1,16 @@
+gin:
+  environment: dev
+event:
+  channel-buffer-size: 10
+  max-workers: 30
+rdbms:
+  driver: postgres
+  host: rdbms
+  port: "5432"
+  database: todo_database
+  user: todo
+  password: admin1234
+  pool:
+    max-idle-connections: 25
+    max-open-connections: 25
+    max-connection-lifetime: 15m

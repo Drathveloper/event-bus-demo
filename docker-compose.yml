@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+  rdbms:
+    build: ./resources/db
+    networks:
+      backend:
+        aliases:
+          - rdbms
+networks:
+  backend:

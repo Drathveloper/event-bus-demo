@@ -1,0 +1,11 @@
+{
+  "version": "1",
+  "packages": [
+    {
+      "path": "infrastructure/database/sqlc",
+      "engine": "postgresql",
+      "schema": "resources/db/schema.sql",
+      "queries": "resources/db/query.sql"
+    }
+  ]
+}
