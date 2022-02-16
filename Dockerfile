@@ -1,4 +1,6 @@
 FROM golang:1.18beta2-alpine3.15
+RUN apk add git
+
 WORKDIR /usr/src/app
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify

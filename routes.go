@@ -3,12 +3,17 @@ package main
 import (
 	"event-bus-demo/infrastructure/util"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func initializeRoutes(profiles []string, controllers RequiredControllers) *gin.Engine {
 	router := gin.Default()
 	router.Use(gin.Recovery())
-
+	router.NoRoute(func(ctx *gin.Context) {
+		ctx.JSON(http.StatusNotFound, gin.H{
+			"message": "endpoint not found",
+		})
+	})
 	v1Group := router.Group("/v1")
 	{
 		toDoGroup := v1Group.Group("/todo")
