@@ -1,6 +1,7 @@
 package main
 
 import (
+	"event-bus-demo/infrastructure/util"
 	"github.com/gin-gonic/gin"
 )
 
@@ -28,12 +29,14 @@ func initializeRoutes(profiles []string, controllers RequiredControllers) *gin.E
 			categoryGroup.PUT("/:id", controllers.CategoryController.UpdateCategory)
 			categoryGroup.DELETE("/:id", controllers.CategoryController.DeleteCategory)
 		}
-		userGroup := v1Group.Group("/user")
-		{
-			userGroup.POST("", controllers.UserController.CreateUser)
-			userGroup.GET("/:id", controllers.UserController.GetUserByID)
-			userGroup.PATCH("/:id", controllers.UserController.UpdateUserPassword)
-			userGroup.DELETE("/:id", controllers.UserController.DeleteUser)
+		if util.Contains[string](profiles, "with_users") {
+			userGroup := v1Group.Group("/user")
+			{
+				userGroup.POST("", controllers.UserController.CreateUser)
+				userGroup.GET("/:id", controllers.UserController.GetUserByID)
+				userGroup.PATCH("/:id", controllers.UserController.UpdateUserPassword)
+				userGroup.DELETE("/:id", controllers.UserController.DeleteUser)
+			}
 		}
 	}
 	return router

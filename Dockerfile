@@ -8,3 +8,5 @@ RUN go build -v -o /usr/local/bin/app
 COPY ./resources /usr/local/bin/resources
 
 CMD ["app", "-active-profiles=default,dev", "-resource-root=/usr/local/bin/resources"]
+# Run with this profile to enable user endpoints
+#CMD ["app", "-active-profiles=default,dev,with_users", "-resource-root=/usr/local/bin/resources"]
